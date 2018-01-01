@@ -9,22 +9,35 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
     <title>Document</title>
 </head>
+
 <body>
     <h1>BookLook
         <i class="fa fa-eye" aria-hidden="true"></i>
     </h1>
+    <div class="book-display"></div>
     <h2>Search by ISBN</h2>
     <form>
         <div class='form-group'>
-            <input type='text' placeholder="Enter ISBN" class="form-control"->
+            <input type='text' id="book-search" placeholder="Enter ISBN or Title" class="form-control" ->
         </div>
-        <button type="button" class='btn btn-primary'>Search</button>
+        <button id="isbn-search" type="button" class='btn btn-primary'>Search by ISBN</button>
+        <button id="title-search" type="button" class='btn btn-primary'>Search by Title</button>
     </form>
 
 
+    <script id="books-template" type='text/x-handlebars-template'>
+        <hr>
+        <h1>{{ title }}</h1>
 
-    <script src="node_modules/jquery/dist/jquery.js">
+        <p>{{ description }}</p>
+        <h2>Written By: {{authors}}</h2>
+        <img src='{{imageLinks.thumbnail}}'>
     </script>
+
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/handlebars/dist/handlebars.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
