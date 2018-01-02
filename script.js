@@ -72,5 +72,5 @@ $('.book-display').on('click', '.show-detail', function () {
 })
 
 $('.book-display').on('click', '.search-return', function(){
-    $(this).parents().siblings().show();
+    $(this).parents().siblings('div, hr').show();
 })
