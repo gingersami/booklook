@@ -1,7 +1,9 @@
 var source = $('#books-template').html()
 var template = Handlebars.compile(source);
+// bind Parsley to the search form
 $('#search-form').parsley();
 
+// AJAX request for search by Author
 var fetchAuthor = function (searchQuery) {
     $.ajax({
         method: "GET",
@@ -18,7 +20,7 @@ var fetchAuthor = function (searchQuery) {
         }
     })
 }
-
+// Ajax Request for search by ISBN
 var fetchISBN = function (searchQuery) {
     $.ajax({
         method: "GET",
@@ -38,7 +40,7 @@ var fetchISBN = function (searchQuery) {
         }
     });
 };
-
+// AJAX Request for search by Title
 var fetchTitle = function (searchQuery) {
     $.ajax({
         method: "GET",
@@ -58,6 +60,7 @@ var fetchTitle = function (searchQuery) {
     })
 }
 
+// Validate the search and append data from ISBN search
 function bookInfo(data) {
      $('#book-search').attr('data-parsley-type','number')
     var newHTML = template(data.items[0].volumeInfo);
@@ -65,6 +68,7 @@ function bookInfo(data) {
 
 }
 
+// Append data from Title Search
 function titleSearch(data) {
     for (var i = 0; i < 10; i++) {
         var newHTML = template(data.items[i].volumeInfo);
@@ -72,13 +76,14 @@ function titleSearch(data) {
     }
 }
 
+// append data from author Search
 function authorSearch(data) {
     for (var i = 0; i < 10; i++) {
         var newHTML = template(data.items[i].volumeInfo);
         $('.book-display').append(newHTML);
     }
 }
-
+// Chcek which radio button is selected and perform the apropriate ajax request
 function getRadioState(searchQuery) {
 
     if ($('#isbn-radio').prop('checked')) {
@@ -89,19 +94,21 @@ function getRadioState(searchQuery) {
         fetchAuthor(searchQuery)
     }
 }
-
+// Click handler for showing more details
+// hides every other book on the page
 $('.book-display').on('click', '.show-detail', function () {
     $('.book-display').children().hide();
     $(this).closest('div').show();
     $(this).closest('div').append("<a href='#' class='search-return'>return to search results</a>")
     $(this).hide();
 })
-
+// click handler for returning back the the search results
+// shows all other elements previously hidden
 $('.book-display').on('click', '.search-return', function () {
     $(this).parents().siblings('div, hr').show();
 })
 
-
+// click handler for peforming a search
 $('#isbn-search').on('click', function () {
     var searchQuery = $('#book-search').val();
     $('#search-form').parsley().validate();
