@@ -68,6 +68,7 @@ $('.book-display').on('click', '.show-detail', function () {
     $('.book-display').children().hide();
     $(this).closest('div').show();
     $(this).closest('div').append("<a href='#' class='search-return'>return to search results</a>")
+    $(this).hide();
 })
 
 $('.book-display').on('click', '.search-return', function(){
